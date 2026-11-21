@@ -27,7 +27,24 @@ flowchart LR
 
 ## Results
 
-<!-- EVAL_RESULTS -->
+Benchmarked on **BEIR SciFact** (5,183 scientific abstracts -> 7,610 chunks, 300 test queries with human relevance
+labels), CPU only. Full report: [`results/EVAL.md`](results/EVAL.md).
+
+| Configuration | P@5 | Recall@10 | MRR@10 | nDCG@10 | p50 latency |
+|---|---|---|---|---|---|
+| BM25 (keyword) | 0.152 | 0.763 | 0.600 | 0.635 | 3.7 ms |
+| Dense (bge-small vectors) | 0.173 | 0.840 | 0.684 | 0.718 | 8.6 ms |
+| **Hybrid (BM25 + vectors)** | 0.169 | **0.850** | **0.685** | **0.721** | 12.9 ms |
+| Hybrid + cross-encoder rerank | 0.165 | 0.842 | 0.666 | 0.703 | 1,744 ms |
+
+What this shows:
+
+- **Hybrid retrieval wins:** +13.6% nDCG@10 and +8.7 points Recall@10 over keyword search, and slightly ahead of
+  pure vector search, at ~13 ms per query.
+- **Reranking is not free:** the general-domain MS MARCO cross-encoder did *not* help on scientific claims and added
+  ~1.7 s per query on CPU, so it is off by default and kept as an option (it tends to help on web/FAQ-style text).
+- **Answers stay grounded:** on 100 questions, 100% of extractive answer sentences come from retrieved sources, 70% of
+  answers cite a document labelled relevant, and 7 low-evidence questions got the "not enough information" fallback.
 
 ## Features
 

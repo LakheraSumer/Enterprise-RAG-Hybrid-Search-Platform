@@ -25,7 +25,7 @@ services:
     build: .
     environment:
       EMBEDDING_PROVIDER: fastembed
-      RERANKER: cross-encoder
+      RERANKER: none   # cross-encoder is optional, see results/EVAL.md
       DATABASE_URL: postgresql://rag:rag@postgres:5432/rag
       REDIS_URL: redis://redis:6379/0
     ports: ["8000:8000"]

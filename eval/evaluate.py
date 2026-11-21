@@ -192,7 +192,7 @@ def main() -> None:
                      f"| {r['p50_ms']} | {r['p95_ms']} |")
     lines += [
         "",
-        f"Answer quality ({answers['generator']} generator, first {answers['queries']} queries, best configuration):",
+        f"Answer quality ({answers['generator']} generator, first {answers['queries']} queries, {configs[-1][0]}):",
         f"groundedness {answers['groundedness']}, citation hit rate {answers['citation_hit_rate']}, "
         f"low-confidence fallbacks {answers['low_confidence_fallbacks']}, p50 end-to-end {answers['p50_ms']} ms, "
         f"LLM tokens {answers['llm_tokens']} (extractive mode, $0).",

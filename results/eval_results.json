@@ -1,0 +1,59 @@
+{
+  "dataset": "BEIR SciFact (test split)",
+  "documents": 5183,
+  "chunks": 7610,
+  "queries": 300,
+  "embedding_model": "BAAI/bge-small-en-v1.5",
+  "reranker_model": "Xenova/ms-marco-MiniLM-L-6-v2",
+  "candidates_per_query": 30,
+  "index_seconds": 968.4,
+  "machine": "Windows AMD64, CPU only, Python 3.12.10",
+  "retrieval": [
+    {
+      "config": "BM25 (keyword)",
+      "P@5": 0.152,
+      "Recall@10": 0.7628,
+      "MRR@10": 0.5996,
+      "nDCG@10": 0.6349,
+      "p50_ms": 3.7,
+      "p95_ms": 7.8
+    },
+    {
+      "config": "Dense (vector)",
+      "P@5": 0.1733,
+      "Recall@10": 0.8402,
+      "MRR@10": 0.6837,
+      "nDCG@10": 0.7184,
+      "p50_ms": 8.6,
+      "p95_ms": 12.0
+    },
+    {
+      "config": "Hybrid (BM25 + vector)",
+      "P@5": 0.1687,
+      "Recall@10": 0.8496,
+      "MRR@10": 0.6848,
+      "nDCG@10": 0.7211,
+      "p50_ms": 12.9,
+      "p95_ms": 20.9
+    },
+    {
+      "config": "Hybrid + cross-encoder rerank",
+      "P@5": 0.1647,
+      "Recall@10": 0.8421,
+      "MRR@10": 0.6657,
+      "nDCG@10": 0.7028,
+      "p50_ms": 1744.3,
+      "p95_ms": 2225.3
+    }
+  ],
+  "answers": {
+    "queries": 100,
+    "generator": "extractive",
+    "groundedness": 1.0,
+    "citation_hit_rate": 0.6989,
+    "low_confidence_fallbacks": 7,
+    "p50_ms": 1675.9,
+    "llm_tokens": 0,
+    "llm_cost_usd": 0.0
+  }
+}
