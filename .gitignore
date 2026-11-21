@@ -1,0 +1,16 @@
+# secrets
+.env
+*.key
+*.pem
+
+# python
+__pycache__/
+*.pyc
+.venv/
+venv/
+.pytest_cache/
+
+# downloaded models and datasets
+.cache/
+data/beir/
+eval_run.log

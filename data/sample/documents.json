@@ -1,0 +1,38 @@
+[
+  {
+    "id": "runbook-pipeline-failure",
+    "title": "Runbook: nightly pipeline failure",
+    "metadata": {"department": "data-platform", "doc_type": "runbook"},
+    "text": "When the nightly ingestion pipeline fails, the on-call engineer first checks the orchestration logs for the failing task. If the failure is a source timeout, rerun only the failed partition; every load is idempotent, so a rerun never duplicates rows. If the failure is a schema change, pause downstream jobs, update the schema contract, and backfill the affected dates. Escalate to the platform lead if data is not restored within 4 hours, because the finance dashboards have a 06:00 IST freshness SLA."
+  },
+  {
+    "id": "policy-data-retention",
+    "title": "Data retention policy",
+    "metadata": {"department": "governance", "doc_type": "policy"},
+    "text": "Raw (bronze) data is retained for 400 days to allow full-year backfills. Cleansed (silver) tables are retained for 7 years to meet financial audit requirements. Personal data such as phone numbers and email addresses must be masked in silver and gold layers. Deletion requests under the privacy policy must be completed within 30 days and logged in the governance tracker."
+  },
+  {
+    "id": "guide-spark-cost",
+    "title": "Spark cost optimisation guidelines",
+    "metadata": {"department": "data-platform", "doc_type": "guide"},
+    "text": "Most Spark cost comes from shuffles and oversized clusters. Broadcast small dimension tables instead of shuffling them in joins. Partition large fact tables by date and filter on the partition column so queries prune files. Use autoscaling job clusters rather than all-purpose clusters for scheduled jobs. Run OPTIMIZE with Z-ORDER on columns that are frequently filtered, and compact small files weekly."
+  },
+  {
+    "id": "process-access-request",
+    "title": "Access request process",
+    "metadata": {"department": "governance", "doc_type": "process"},
+    "text": "To request access to a gold dataset, raise a ticket with the dataset name, business justification and your manager's approval. Access to tables containing personal data additionally requires sign-off from the data protection officer. Standard requests are fulfilled within 2 business days. Access is reviewed every quarter and unused grants are revoked automatically after 90 days."
+  },
+  {
+    "id": "sla-data-quality",
+    "title": "Data quality SLA",
+    "metadata": {"department": "data-platform", "doc_type": "policy"},
+    "text": "Every gold table must pass four checks before publishing: row-count reconciliation against silver, no null business keys, no duplicate primary keys, and freshness within 24 hours. A failed check blocks the publish step and alerts the owning team. The monthly data quality score is the percentage of scheduled runs that pass all checks; the target is 99 percent."
+  },
+  {
+    "id": "faq-onboarding",
+    "title": "New joiner FAQ",
+    "metadata": {"department": "people", "doc_type": "faq"},
+    "text": "New engineers get laptop and SSO access on day one. Production data access is granted only after the data privacy training is completed. Each new joiner is paired with a buddy for the first 30 days. Team standups happen at 10:00 IST on weekdays."
+  }
+]
